@@ -1,0 +1,1 @@
+# bundle-snappydata-1-docker-debezium_kafka

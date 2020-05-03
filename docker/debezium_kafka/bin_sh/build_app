@@ -27,29 +27,17 @@ mvn package clean package
 if [ ! -d padogrid/lib ]; then
    mkdir -p padogrid/lib
 fi
-if [ ! -d padogrid/plugins ]; then
-   mkdir -p padogrid/plugins
-fi
-if [ ! -d padogrid/log ]; then
-   mkdir -p padogrid/log
-fi
-if [ ! -d padogrid/etc ]; then
-   mkdir -p padogrid/etc
-fi
-if [ ! -d etc ]; then
-   mkdir etc
-fi
 
-# Copy jdbc driver
+# Copy SnappyData Kafka connector library
+cp $PADOGRID_HOME/lib/padogrid-common*.jar padogrid/lib/
 cp $PADOGRID_HOME/snappydata/lib/snappydata-addon-core*.jar padogrid/lib/
-cp $PADOGRID_HOME/snappydata/plugins/* padogrid/plugins/
-cp $PADOGRID_HOME/snappydata/etc/template-log4j2.properties etc/log4j2.properties
-
-# Copy SnappyData table creation filesg the SnappyData docker shared dir
-cp $SCRIPTDIR/create_inventory_schema.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
-cp $SCRIPTDIR/create_inventory_tables.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
 
 popd > /dev/null
+
+# Copy SnappyData table creation files to the SnappyData docker shared directory
+cp create_inventory_schema.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
+cp create_inventory_tables.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
+
 
 #
 # Display build information

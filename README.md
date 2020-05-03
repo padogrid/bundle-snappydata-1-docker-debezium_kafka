@@ -217,7 +217,7 @@ The last command should display the inventory connector that we registered previ
 
 ```console
 [
-  "debezium-snappydatageode-sink",
+  "debezium-snappydata-sink",
   "inventory-connector"
 ]
 ```
@@ -253,7 +253,7 @@ snappy> select * from inventory.customers;
 
 **Pulse URL:** http://localhost:5050
 
-![Pulse Screenshot](/images/pulse-inventory-customers.png)
+![Pulse Screenshot](/images/pulse-snappy-cluster.png)
 
 ## Tearing Down
 
@@ -268,3 +268,25 @@ docker-compose down
 
 # Prune all stopped containers 
 docker container prune -f
+```
+
+## Tips
+
+### 1. When I run `start_mysql` I get the following error message.
+
+```console
+docker: Error response from daemon: Ports are not available: listen tcp 0.0.0.0:3306: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ERRO[0000] error waiting for container: context canceled
+```
+
+The above error occurs if you have MySQL already running locally in your host OS. The `mysql` Docker container listens on the same port number. You must stop the local MySQL instance and prune the containers before runngin `start_mysql` again.
+
+```bash
+# First, stop your local MySQL instance running in the host OS.
+
+# Prune the containers
+docker container prune -f
+
+# Run start_mysql again
+./start_mysql
+```

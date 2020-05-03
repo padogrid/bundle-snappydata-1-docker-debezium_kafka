@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+echo docker container exec -it $DOCKER_LOCATOR_NAME /opt/snappydata/bin/snappy run --file=/padogrid/etc/create_inventory_tables.sql --client-bind-address=locator --client-port=1527
+docker container exec -it $DOCKER_LOCATOR_NAME /opt/snappydata/bin/snappy run --file=/padogrid/etc/create_inventory_tables.sql --client-bind-address=locator --client-port=1527

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+# CONNECT_PLUGIN_PATH is broken in KafkaConnect. It only loads the jar file with the
+# connector class. A wround is to set CLASSPATH.
+# Due to jar conflicts, /kafka/libs/* must be included first in the class path.
+# Set arguments as Docker options ($@)
+echo docker run $@ --volume $APP_DIR/padogrid:/padogrid -it --rm --name connect -p 8083:8083 -e CONNECT_PLUGIN_PATH=/kafka/connect,/padogrid/lib,/padogrid/plugins -e CLASSPATH=/kafka/libs/*:/padogrid/lib/*:/padogrid/plugins/* -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link zookeeper:zookeeper --link kafka:kafka --link mysql:mysql padogrid/debezium-connect-openjdk8:latest
+docker run $@ --volume $APP_DIR/padogrid:/padogrid -it --rm --name connect -p 8083:8083 -e CONNECT_PLUGIN_PATH=/kafka/connect,/padogrid/lib,/padogrid/plugins -e CLASSPATH=/kafka/libs/*:/padogrid/lib/*:/padogrid/plugins/* -e GROUP_ID=1 -e CONFIG_STORAGE_TOPIC=my_connect_configs -e OFFSET_STORAGE_TOPIC=my_connect_offsets -e STATUS_STORAGE_TOPIC=my_connect_statuses --link zookeeper:zookeeper --link kafka:kafka --link mysql:mysql padogrid/debezium-connect-openjdk8:latest

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker stop mysqlterm watcher-customers watcher-orders connect mysql kafka zookeeper

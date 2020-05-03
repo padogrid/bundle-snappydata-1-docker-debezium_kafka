@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+docker run -it --rm --name watcher-orders --link zookeeper:zookeeper --link kafka:kafka debezium/kafka:1.0 watch-topic -a -k orders
+

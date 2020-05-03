@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+echo docker container exec -it $DOCKER_LOCATOR_NAME /opt/snappydata/bin/snappy 
+docker container exec -it $DOCKER_LOCATOR_NAME /opt/snappydata/bin/snappy 
+

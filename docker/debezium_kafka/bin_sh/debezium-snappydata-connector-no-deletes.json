@@ -1,0 +1,22 @@
+{
+    "name": "debezium-snappydata-sink",
+    "config": {
+        "connector.class": "org.snappydata.addon.kafka.debezium.DebeziumKafkaSinkConnector",
+        "tasks.max": "1",
+        "topics": "customers",
+        "transforms": "unwrap",
+        "transforms.unwrap.type": "io.debezium.transforms.UnwrapFromEnvelope",
+        "connection.url": "jdbc:snappydata://host.docker.internal:1527/",
+        "connection.driver.class": "io.snappydata.jdbc.ClientDriver",
+        "connection.user": "app",
+        "connection.password": "app",
+        "table": "customers",
+        "smt.enabled": true,
+        "debug.enabled": false,
+        "delete.enabled": true,
+        "source.column.names": "id, first_name, last_name, email",
+        "target.column.names": "id, firstName, lastName, email"
+        "queue.batch.size": 20,
+        "queue.batch.intervalInMsec": 100
+     }
+}

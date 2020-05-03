@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+if [ "$HELP" == "true" ]; then
+   echo "Usage:"
+   echo "   ./$EXECUTABLE [-clean] [-?]"
+   echo ""
+   echo "   Builds the Debezium demo data jar and copies the SnappyData jar files to the"
+   echo "   'padogrid' directory which is mounted by the Docker SnappyData connector container."
+   echo ""
+   echo "      $APP_DIR/padogrid/plugins/debezium-demo-data-1.0-SNAPSHOT.jar"
+   echo ""
+   echo "Default: ./$EXECUTABLE"
+   echo ""
+   exit
+fi
+
+pushd $APP_DIR > /dev/null
+
+# Build debezium-demo-data-1.0-SNAPSHOT.jar
+mvn package clean package
+
+# Copy the snappydata and snappydata-addon jar files
+if [ ! -d padogrid/lib ]; then
+   mkdir -p padogrid/lib
+fi
+if [ ! -d padogrid/plugins ]; then
+   mkdir -p padogrid/plugins
+fi
+if [ ! -d padogrid/log ]; then
+   mkdir -p padogrid/log
+fi
+if [ ! -d padogrid/etc ]; then
+   mkdir -p padogrid/etc
+fi
+if [ ! -d etc ]; then
+   mkdir etc
+fi
+
+# Copy jdbc driver
+cp $PADOGRID_HOME/snappydata/lib/snappydata-addon-core*.jar padogrid/lib/
+cp $PADOGRID_HOME/snappydata/plugins/* padogrid/plugins/
+cp $PADOGRID_HOME/snappydata/etc/template-log4j2.properties etc/log4j2.properties
+
+# Copy SnappyData table creation filesg the SnappyData docker shared dir
+cp $SCRIPTDIR/create_inventory_schema.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
+cp $SCRIPTDIR/create_inventory_tables.sql $SNAPPYDATA_DOCKER_DIR/padogrid/etc/
+
+popd > /dev/null
+
+#
+# Display build information
+#
+echo ""
+echo "Workspace: $PADOGRID_WORKSPACE"
+echo ""
+echo "Build complete"
+echo ""

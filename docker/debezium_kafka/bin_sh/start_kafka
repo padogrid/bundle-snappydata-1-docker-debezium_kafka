@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+# Set arguments as Docker options ($@)
+echo docker run $@ -it --rm --name kafka -p 9092:9092 --link zookeeper:zookeeper padogrid/debezium-kafka-openjdk8:latest
+docker run $@ -it --rm --name kafka -p 9092:9092 --link zookeeper:zookeeper padogrid/debezium-kafka-openjdk8:latest

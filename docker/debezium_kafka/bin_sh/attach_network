@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+. $SCRIPT_DIR/.addonenv.sh
+
+EXECUTABLE="`basename $0`"
+
+# Attach Kafka connector to the SnappyData network
+echo docker network connect $DOCKER_SNAPPYDATA_NETWORK connect
+docker network connect $DOCKER_SNAPPYDATA_NETWORK connect

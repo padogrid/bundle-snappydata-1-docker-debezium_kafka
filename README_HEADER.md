@@ -1,0 +1,1 @@
+This bundle integrates SnappyData/ComputeDB with Debezium for ingesting initial data and CDC records from MySQL into a SnappyData/ComputeDB cluster via a Kafka sink connector included in the padogrid distribution. It supports inserts, updates and deletes.

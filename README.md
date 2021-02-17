@@ -20,7 +20,7 @@ This use case ingests data changes made in the MySQL database into SnappyData/Co
 
 - Docker
 - Docker Compose
-- Maven
+- Maven 3.x
 
 ## Optional Software
 

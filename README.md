@@ -4,6 +4,8 @@ This bundle integrates SnappyData/ComputeDB with Debezium for ingesting initial 
 
 ## Installing Bundle
 
+![PadoGrid](https://github.com/padogrid/padogrid/raw/develop/images/padogrid-3d-16x16.png) [*Driven by PadoGrid*](https://github.com/padogrid)
+
 ```console
 install_bundle -download bundle-snappydata-1-docker-debezium_kafka
 ```

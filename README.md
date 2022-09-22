@@ -17,7 +17,7 @@ install_bundle -download bundle-snappydata-1-docker-debezium_kafka
 
 This use case ingests data changes made in the MySQL database into SnappyData/ComputeDB cluster via Kafka connectors: the Debezium MySQL source connector and the `snappydata-addon` Debezium sink connector.
 
-![Debezium-Kafka Diagram](/images/debezium-kafka.jpg)
+![Debezium-Kafka Diagram](images/debezium-kafka.jpg)
 
 ## Required Software
 
@@ -43,7 +43,7 @@ All the commands provided in the tutorial are wrapped in the scripts found in th
 Let's create a SnappyData/ComputeDB cluster to run on Docker containers as follows. The bundled Debezium Docker component has been preconfigured with the SnappyData cluster name, `snappy`. If you use a different name, then you will need to change the cluster name in the `setenv.sh` file as described in the next section.
 
 ```console
-create_docker -cluster snappy -host host.docker.internal
+create_docker -product snappydata -cluster snappy -host host.docker.internal
 cd_docker snappy
 ```
 
@@ -256,7 +256,7 @@ snappy> select * from inventory.customers;
 
 **Pulse URL:** http://localhost:5050
 
-![Pulse Screenshot](/images/pulse-snappy-cluster.png)
+![Pulse Screenshot](images/pulse-snappy-cluster.png)
 
 ## Tearing Down
 

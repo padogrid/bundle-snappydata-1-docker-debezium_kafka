@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker run -it --rm --name watcher --link zookeeper:zookeeper --link kafka:kafka debezium/kafka:1.0 watch-topic -a -k dbserver1.inventory.customers
+docker run -it --rm --name watcher --network my_network -e ZOOKEEPER_CONNECT=zookeeper -e KAFKA_BROKER=kafka:9092 debezium/kafka:1.0 watch-topic -a -k dbserver1.inventory.customers
 

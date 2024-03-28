@@ -15,7 +15,7 @@
         "debug.enabled": false,
         "delete.enabled": true,
         "source.column.names": "id, first_name, last_name, email",
-        "target.column.names": "id, firstName, lastName, email"
+        "target.column.names": "id, firstName, lastName, email",
         "queue.batch.size": 20,
         "queue.batch.intervalInMsec": 100
      }

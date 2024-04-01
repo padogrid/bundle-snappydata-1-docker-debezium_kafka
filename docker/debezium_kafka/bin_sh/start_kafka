@@ -5,5 +5,5 @@ SCRIPT_DIR="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 EXECUTABLE="`basename $0`"
 
 # Set arguments as Docker options ($@)
-echo docker run $@ -it --rm --name kafka --network my_network ZOOKEEPER_CONNECT=zookeeper -p 9092:9092 padogrid/debezium-kafka-openjdk8:latest
-docker run $@ -it --rm --name kafka --network my_network -e ZOOKEEPER_CONNECT=zookeeper -p 9092:9092 padogrid/debezium-kafka-openjdk8:latest
+echo docker run $@ -it --rm --name kafka --network my_network -p 9092:9092 -e ZOOKEEPER_CONNECT=zookeeper quay.io/debezium/kafka:2.4
+docker run $@ -it --rm --name kafka --network my_network -p 9092:9092 -e ZOOKEEPER_CONNECT=zookeeper quay.io/debezium/kafka:2.4

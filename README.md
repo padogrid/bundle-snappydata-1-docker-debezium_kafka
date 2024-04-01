@@ -169,7 +169,7 @@ padogrid
 
 There are numerous Docker containers to this demo. We'll first start the SnappyData/ComputeDB cluster containers and then proceed with the Debezium containers. By default, the scripts provided run the containers in the foreground so that you can view the log events. You will need to launch a total of eight (8) terminals. If you have a screen splitter such as Windows Terminal, it will make things easier.
 
-![WSL Terminal Screenshot](/images/wsl-terminal-inventory.png)
+![iTerm Terminal Screenshot](images/iterm-terminal-inventory.png)
 
 You can also run some of the scripts in the background by including the '-d' option. These scripts are mentioned below.
 

@@ -308,6 +308,9 @@ cd_docker debezium_kafka/bin_sh
 cd_docker snappy
 docker compose down
 
+# Remove my_network
+docker network rm my_network
+
 # Prune all stopped containers 
 docker container prune -f
 ```
